@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Execution Result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Execution Result</h2>
+        <div class="result-box">
+            <?php
+            if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['lab'])) {
+                $lab = $_POST['lab'];
+
+                switch ($lab) {
+                    case '1':
+                        $age = 18;
+                        if ($age >= 18) {
+                            echo "You are eligible to vote.";
+                        }
+                        break;
+                    case '2':
+                        $num = isset($_POST['num1']) ? (int)$_POST['num1'] : 0;
+                        if ($num > 0) {
+                            echo "Positive number";
+                        } else if ($num < 0) {
+                            echo "Negative number";
+                        } else {
+                            echo "The number is Zero";
+                        }
+                        break;
+                    case '3':
+                        $grade = isset($_POST['grade_num']) ? (int)$_POST['grade_num'] : 0;
+                        if ($grade >= 90 && $grade <= 100) {
+                            echo "Excellent";
+                        } else if ($grade >= 80 && $grade <= 89) {
+                            echo "Good";
+                        } else if ($grade >= 70 && $grade <= 79) {
+                            echo "Average";
+                        } else {
+                            echo "Failed";
+                        }
+                        break;
+                    case '4':
+                        $num = isset($_POST['num1']) ? (int)$_POST['num1'] : 0;
+                        echo ($num % 2 == 0) ? "Even number" : "Odd number";
+                        break;
+                    case '5':
+                        $n1 = (int)$_POST['num1'];
+                        $n2 = (int)$_POST['num2'];
+                        $n3 = (int)$_POST['num3'];
+                        if ($n1 >= $n2 && $n1 >= $n3) {
+                            echo "Largest number is: " . $n1;
+                        } else if ($n2 >= $n1 && $n2 >= $n3) {
+                            echo "Largest number is: " . $n2;
+                        } else {
+                            echo "Largest number is: " . $n3;
+                        }
+                        break;
+                    case '6':
+                        echo ($_POST['password'] === "admin123") ? "Access Granted" : "Access Denied";
+                        break;
+                    case '7':
+                        $year = (int)$_POST['year'];
+                        if (($year % 4 == 0 && $year % 100 != 0) || ($year % 400 == 0)) {
+                            echo "$year is a Leap Year.";
+                        } else {
+                            echo "$year is not a Leap Year.";
+                        }
+                        break;
+                    case '8':
+                        $age = (int)$_POST['age'];
+                        $cit = $_POST['citizenship'] ?? '';
+                        if ($age >= 18 && strcasecmp($cit, "Filipino") == 0) {
+                            echo "You are eligible to vote.";
+                        } else {
+                            echo "Voting denied: Criteria unmet.";
+                        }
+                        break;
+                    case '9':
+                        $amt = (float)$_POST['amount'];
+                        $disc = 0;
+                        if ($amt >= 1000) {
+                            $disc = 0.20;
+                        } else if ($amt >= 500) {
+                            $disc = 0.10;
+                        }
+                        echo "Original: $$amt<br>Discount Applied: " . ($disc * 100) . "%<br>Final Total: $" . ($amt - ($amt * $disc));
+                        break;
+                    case '10':
+                        echo ($_POST['username'] === 'admin' && $_POST['password'] === '1234') ? "Login Successful. Welcome Admin!" : "Invalid Credentials.";
+                        break;
+                    case '11':
+                        switch ((int)$_POST['day_num']) {
+                            case 1:
+                                echo "Monday";
+                                break;
+                            case 2:
+                                echo "Tuesday";
+                                break;
+                            case 3:
+                                echo "Wednesday";
+                                break;
+                            case 4:
+                                echo "Thursday";
+                                break;
+                            case 5:
+                                echo "Friday";
+                                break;
+                            case 6:
+                                echo "Saturday";
+                                break;
+                            case 7:
+                                echo "Sunday";
+                                break;
+                            default:
+                                echo "Invalid Day";
+                                break;
+                        }
+                        break;
+                    case '12':
+                        switch (strtoupper($_POST['letter_grade'] ?? '')) {
+                            case 'A':
+                                echo "Excellent";
+                                break;
+                            case 'B':
+                                echo "Good";
+                                break;
+                            case 'C':
+                                echo "Average";
+                                break;
+                            case 'D':
+                                echo "Poor";
+                                break;
+                            case 'F':
+                                echo "Failed";
+                                break;
+                            default:
+                                echo "Unknown Grade";
+                                break;
+                        }
+                        break;
+                    case '13':
+                        $n1 = (float)$_POST['num1'];
+                        $n2 = (float)$_POST['num2'];
+                        switch ($_POST['operator'] ?? '+') {
+                            case '+':
+                                echo "Result: " . ($n1 + $n2);
+                                break;
+                            case '-':
+                                echo "Result: " . ($n1 - $n2);
+                                break;
+                            case '*':
+                                echo "Result: " . ($n1 * $n2);
+                                break;
+                            case '/':
+                                echo ($n2 != 0) ? "Result: " . ($n1 / $n2) : "Error: Zero division";
+                                break;
+                        }
+                        break;
+                    case '14':
+                        switch ($_POST['menu_choice'] ?? '') {
+                            case '1':
+                                echo "Action: Add Data";
+                                break;
+                            case '2':
+                                echo "Action: Edit Data";
+                                break;
+                            case '3':
+                                echo "Action: Delete Data";
+                                break;
+                        }
+                        break;
+                    case '15':
+                        $months = [1 => "Jan", 2 => "Feb", 3 => "Mar", 4 => "Apr", 5 => "May", 6 => "Jun", 7 => "Jul", 8 => "Aug", 9 => "Sep", 10 => "Oct", 11 => "Nov", 12 => "Dec"];
+                        echo $months[(int)$_POST['month_num']] ?? "Invalid Month";
+                        break;
+                    case '16':
+                        switch (strtolower($_POST['traffic_color'] ?? '')) {
+                            case 'red':
+                                echo "STOP!";
+                                break;
+                            case 'yellow':
+                                echo "SLOW DOWN";
+                                break;
+                            case 'green':
+                                echo "GO!";
+                                break;
+                        }
+                        break;
+                }
+            }
+            ?>
+        </div>
+        <div class="navigation-controls" style="margin-top: 20px; text-align: center;">
+            <a href="index.php" class="back-link">↩ Return to Dashboard</a>
+            <br><br>
+            <button type="button" class="team-btn" onclick="openModal()">Group Member Web'Tech</button>
+        </div>
+
+    </div> ```
+
+    <div class="modal-overlay" id="teamModal">
+        <div class="modal-card">
+            <h2> GROUP 5</h2>
+            <p> To be developer's someday!</p>
+
+            <div class="members-grid">
+                <div class="member-profile">
+                    <img src="images/ashley.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+1'">
+                    <div class="member-name">Ashley Navarro</div>
+                    <div class="member-role">Leader</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/cymil.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Cymil Mison</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/mark.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+3'">
+                    <div class="member-name">Mark Angelo Cagadoc</div>
+                    <div class="member-role">Assisstant Leader</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/remollo.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Jhon Tayrus Remollo</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/samal.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Salahudin Samal</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/michael.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">John Michael Lluveras</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/sam.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Samantha Flores</div>
+                    <div class="member-role">Member</div>
+                </div>
+            </div>
+
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+
+    <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('teamModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('teamModal').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

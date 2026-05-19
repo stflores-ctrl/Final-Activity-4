@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PHP Conditional Labs (1-16)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>PHP Fun Test</h2>
+        <p>Kindly Select any Lab to test.</p>
+        <p>Enjoy!</p>
+
+        <form action="process.php" method="POST">
+            <label for="lab-select">Choose a Lab:</label>
+            <select id="lab-select" name="lab" onchange="toggleFields()">
+                <option value="1">Lab 1: Basic If Statement (Age Vote Check)</option>
+                <option value="2">Lab 2: If-Else Statement (Positive/Negative)</option>
+                <option value="3">Lab 3: If-ElseIf Statement (Grade Scale)</option>
+                <option value="4">Lab 4: Even or Odd Checker</option>
+                <option value="5">Lab 5: Largest of Three Numbers</option>
+                <option value="6">Lab 6: Password Checker</option>
+                <option value="7">Lab 7: Leap Year Checker</option>
+                <option value="8">Lab 8: Nested If (Voter Citizenship)</option>
+                <option value="9">Lab 9: Discount Calculator</option>
+                <option value="10">Lab 10: Simple Login System</option>
+                <option value="11">Lab 11: Day of the Week (Switch)</option>
+                <option value="12">Lab 12: Grade Description (Switch)</option>
+                <option value="13">Lab 13: Simple Calculator (Switch)</option>
+                <option value="14">Lab 14: Menu Selection (Switch)</option>
+                <option value="15">Lab 15: Month Name Generator (Switch)</option>
+                <option value="16">Lab 16: Traffic Light System (Switch)</option>
+            </select>
+
+            <div id="dynamic-inputs"></div>
+
+            <button type="submit">Open Lab</button>
+        </form>
+
+
+        <button type="button" class="team-btn" onclick="openModal()">Group Member Web'Tech</button>
+        <a href="index.php" class="back-link">← Return to Dashboard</a>
+    </div>
+
+
+
+    <div class="modal-overlay" id="teamModal">
+        <div class="modal-card">
+            <h2> GROUP 5</h2>
+            <p> To be developer's someday!</p>
+
+            <div class="members-grid">
+                <div class="member-profile">
+                    <img src="images/ashley.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+1'">
+                    <div class="member-name">Ashley Navarro</div>
+                    <div class="member-role">Leader</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/cymil.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Cymil Mison</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/mark.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+3'">
+                    <div class="member-name">Mark Angelo Cagadoc</div>
+                    <div class="member-role">Assisstant Leader</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/remollo.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Jhon Tayrus Remollo</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/samal.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Salahudin Samal</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/michael.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">John Michael Lluveras</div>
+                    <div class="member-role">Member</div>
+                </div>
+
+                <div class="member-profile">
+                    <img src="images/sam.jpg.jpg" alt="Member Photo" class="member-photo" onerror="this.src='https://placehold.co/150x150/b3e5fc/0288d1?text=Member+2'">
+                    <div class="member-name">Samantha Flores</div>
+                    <div class="member-role">Member</div>
+                </div>
+            </div>
+
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('teamModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('teamModal').classList.remove('active');
+        }
+
+        function toggleFields() {
+            const lab = document.getElementById('lab-select').value;
+            const container = document.getElementById('dynamic-inputs');
+            container.innerHTML = '';
+            let html = '';
+
+            if (lab === '1') {
+                html = `<p class="lab-section"><strong>Lab 1:</strong> Predefined variable $age = 18 will be tested.</p>`;
+            } else if (lab === '2' || lab === '4') {
+                html = `<label>Enter a Number:</label><input type="number" name="num1" required>`;
+            } else if (lab === '3') {
+                html = `<label>Enter Student's Numerical Grade:</label><input type="number" name="grade_num" min="0" max="100" required>`;
+            } else if (lab === '5') {
+                html = `
+            <label>Number 1:</label><input type="number" name="num1" required>
+            <label>Number 2:</label><input type="number" name="num2" required>
+            <label>Number 3:</label><input type="number" name="num3" required>
+        `;
+            } else if (lab === '6') {
+                html = `<label>Enter Password:</label><input type="text" name="password" required>`;
+            } else if (lab === '7') {
+                html = `<label>Enter Year:</label><input type="number" name="year" required>`;
+            } else if (lab === '8') {
+                html = `
+            <label>Enter Age:</label><input type="number" name="age" required>
+            <label>Enter Citizenship:</label><input type="text" name="citizenship" placeholder="e.g., Filipino" required>
+        `;
+            } else if (lab === '9') {
+                html = `<label>Enter Purchase Amount:</label><input type="number" step="0.01" name="amount" required>`;
+            } else if (lab === '10') {
+                html = `
+            <label>Username:</label><input type="text" name="username" required>
+            <label>Password:</label><input type="text" name="password" required>
+        `;
+            } else if (lab === '11') {
+                html = `<label>Enter Day Number (1-7):</label><input type="number" name="day_num" min="1" max="7" required>`;
+            } else if (lab === '12') {
+                html = `<label>Enter Letter Grade (A-F):</label><input type="text" name="letter_grade" maxlength="1" style="text-transform:uppercase" required>`;
+            } else if (lab === '13') {
+                html = `
+            <label>Number 1:</label><input type="number" step="any" name="num1" required>
+            <label>Operator:</label>
+            <select name="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <label>Number 2:</label><input type="number" step="any" name="num2" required>
+        `;
+            } else if (lab === '14') {
+                html = `
+            <label>Select Menu Action:</label>
+            <select name="menu_choice">
+                <option value="1">1 = Add</option>
+                <option value="2">2 = Edit</option>
+                <option value="3">3 = Delete</option>
+            </select>
+        `;
+            } else if (lab === '15') {
+                html = `<label>Enter Month Number (1-12):</label><input type="number" name="month_num" min="1" max="12" required>`;
+            } else if (lab === '16') {
+                html = `
+            <label>Select Traffic Light Color:</label>
+            <select name="traffic_color">
+                <option value="red">Red</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+            </select>
+        `;
+            }
+            container.innerHTML = html;
+        }
+        window.onload = toggleFields;
+    </script>
+</body>
+
+</html>
